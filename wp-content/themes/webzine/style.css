@@ -1,0 +1,12 @@
+/*
+Theme Name: The Webzine
+Theme URI: http://dev.jiboneus.com
+Author: J.Shamsul (@jibone)
+Author URI: http://jshamsul.com
+Description: A custom made theme for Jiboneus websize. Uses mustache and backbone.js
+Version: 0.1
+License: Copyright
+Text Domain: jiboneus
+
+Main css and javascript files are in _sass and _coffee, compiled using the included Cakefile.
+*/

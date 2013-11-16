@@ -1,0 +1,10 @@
+{
+  "require": {
+    "mustache/mustache": "2.*"
+  },
+  "autoload": {
+    "classmap": [
+      "lib"
+    ]
+  }
+}

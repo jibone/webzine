@@ -1,0 +1,6 @@
+.webzine-news-source-container 
+p.source-name-input-container { display: inline-block; width: 40%; margin-right: 20px; }
+.webzine-news-source-container 
+p.source-link-input-container { display: inline-block; width: 45%; }
+.webzine-news-source-container p label { display: block; }
+.webzine-news-source-container p input { width: 100%; }

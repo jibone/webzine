@@ -1,0 +1,109 @@
+###
+#
+# Build Script
+# Compiles Sass and Coffee files to CSS and JavaScript
+#
+###
+ 
+# ------------------------------------------------------
+# -- Load dependencies ---------------------------------
+fs              = require "fs"
+{ spawn, exec } = require "child_process"
+ 
+# ------------------------------------------------------
+# -- console colors ------------------------------------
+red   = "\u001b[31m"
+blue  = "\u001b[34m"
+green = "\u001b[32m"
+reset = "\u001b[0m"
+ 
+# ------------------------------------------------------
+# -- Define directory path -----------------------------
+coffee =
+  srcDir: '_coffee'
+  outDir: 'js'
+  inFiles: ['jiboneus']
+  outFile: 'jiboneus'
+ 
+joinedFiles = ("#{coffee.srcDir}/#{file}.coffee" for file in coffee.inFiles).join ' '
+jsOutput = "#{coffee.outDir}/#{coffee.outFile}"
+ 
+sass =
+  srcDir: '_sass'
+  outDir: 'css'
+  file: 'jiboneus'
+ 
+# ------------------------------------------------------
+# -- time function -------------------------------------
+gettime = () ->
+  d = new Date()
+  curr_hour = d.getHours()
+  if curr_hour < 12
+    a_p = "AM"
+  else
+    a_p = "PM"
+  curr_hour = 12 if curr_hour is 0
+  curr_hour = curr_hour - 12 if curr_hour > 12
+  curr_min = d.getMinutes()
+  curr_min = curr_min + ""
+  curr_min = "0" + curr_min if curr_min.length is 1
+  curr_hour + ":" + curr_min + " " + a_p
+ 
+# ------------------------------------------------------
+# -- Deal with the errors ------------------------------
+exerr = (err, sout, serr) ->
+  process.stdout.write "[#{red}#{gettime()}#{reset}] " + err if err
+  process.stdout.write "[#{blue}#{gettime()}#{reset}] " + sout if sout
+  process.stdout.write "[#{red}#{gettime()}#{reset}] " + serr if serr
+ 
+# ------------------------------------------------------
+# -- Compile & Watch functions -------------------------
+compileCoffee = () ->
+  exec "coffee -j #{jsOutput}.js -c #{joinedFiles}", exerr
+  process.stdout.write "[#{blue}#{gettime()}#{reset}] " + green + "compiled" + reset + " #{joinedFiles}\n"
+ 
+compileSass = () ->
+  exec "sass -t compressed #{sass.srcDir}/#{sass.file}.scss #{sass.outDir}/#{sass.file}.css", exerr
+  process.stdout.write "[#{blue}#{gettime()}#{reset}] " + green + "compiled" + reset + " #{sass.srcDir}/#{sass.file}.scss\n"
+ 
+watchCoffeeFiles = (filename) ->
+  unless filename.charAt(0) is "."
+    process.stdout.write "[#{blue}#{gettime()}#{reset}] " + "#{blue}watching#{reset}: " + "#{coffee.srcDir}/" + filename + "\n"
+    fs.watchFile "#{coffee.srcDir}" + filename, (curr, prev) ->
+      process.stdout.write "[#{blue}#{gettime()}#{reset}] " + "#{blue}changed!#{reset}: " + filename + "\n"
+      compileCoffee()
+ 
+watchSassFiles = (filename) ->
+  unless filename.charAt(0) is "."
+    process.stdout.write "[#{blue}#{gettime()}#{reset}] " + "#{blue}watching#{reset}: " + "#{sass.srcDir}/" + filename + "\n"
+    fs.watchFile "#{sass.srcDir}/" + filename, (curr, prev) ->
+      process.stdout.write "[#{blue}#{gettime()}#{reset}] " + "#{blue}changed!#{reset}: " + filename + "\n"
+      compileSass()
+ 
+# ------------------------------------------------------
+# -- All the tasks -------------------------------------
+task 'build', 'join and compile *.coffee and *.scss files', ->
+  compileCoffee()
+  compileSass()
+ 
+task 'build:js', 'join and compile *.coffee', ->
+  compileCoffee()
+  process.stdout.write "[#{blue}#{gettime()}#{reset}] " + green + "compiled" + reset + " #{strFiles}\n"
+ 
+task 'build:css', 'compile *.scss files', ->
+  compileSass()
+  process.stdout.write "[#{blue}#{gettime()}#{reset}] " + green + "compiled" + reset + " #{sass.file}.css\n"
+ 
+task 'watch', 'watch coffee and sass directory for changes and compile', ->
+  filearrayCoffee = fs.readdirSync coffee.srcDir
+  watchCoffeeFiles filename for filename in filearrayCoffee
+  filearraySass = fs.readdirSync sass.srcDir
+  watchSassFiles filename for filename in filearraySass
+ 
+task 'watch:js', 'watch coffee directory for changes and compile', ->
+  filearray = fs.readdirSync coffee.srcDir
+  watchCoffeeFiles filename for filename in filearray
+ 
+task 'watch:css', 'watch sass directory for changes and compile', ->
+  filearray = fs.readdirSync sass.srcDir
+  watchSassFiles filename for filename in filearray

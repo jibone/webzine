@@ -1,0 +1,95 @@
+{{> header_html}}
+
+  <body>
+    
+    {{> top_navi}}
+
+    {{#content.featured_post}}
+    <!-- hero article container start -->
+    <div class="featured-hero-container">
+      <div class="hero-image-container" style="background-image: url({{image}})">
+        <div class="hero-shades"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 hero-content">
+              <div class="label">FEATURED</div>
+              <h1 class="hero-title" id="heroTitle"><a href="{{permalink}}" class="hero-title">{{title}}</a></h1>
+              <div class="content">{{{excerpt}}}</div>
+              <div class="content"><span class="author-name">{{author}}</span> &middot; <span class="post-date">{{date}}</span></div>
+              <div class="content"><a href="{{permalink}}" class="btn btn-default btn-featured">Read</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- hero article container ends -->
+    {{/content.featured_post}}
+
+    {{#content.coming_soon}}
+    <!-- coming soon container start -->
+    <div class="featured-hero-container">
+      <div class="hero-image-container" style="background-image: url({{paths.img}}samples/coming_soon.jpg);">
+        <div class="hero-shades"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 hero-content">
+              <h1 class="hero-title" id="heroTitle"><a class="hero-title">Coming Soon</a></h1>
+              <div class="content">A new exciting Webzine.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- coming soon container ends -->
+    {{/content.coming_soon}}
+
+    <!-- body content container start -->
+    <div class="body-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+            
+            {{#content.content_post}}
+            <div class="article-container">
+              <h3 class="title"><a href="{{permalink}}">{{title}}</a></h3>
+              <p class="meta"> {{date}} &mdash; by <a href="">{{author}}</a></p>
+              <p class="image image-{{type}}"><img src="{{image}}"></p>
+              <div class="content">{{{excerpt}}}</div>
+              <p class="continue"><a href="{{permalink}}">Read the rest</a></p>
+            </div>
+            {{/content.content_post}}
+
+            <div class="article-container">
+              <h3 class="title"></h3>
+              <div class="content">
+                <p class="lead">We are also looking for passionate writers to join our editorial team. Interested? Drop us an email :- <em>editors @ jiboneus.com</em></p>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            
+            <h4 class="sidebar-title">Updates</h4>
+            
+            {{#content.news_post}}
+            <div class="news-container">
+              <p><span class="title">{{title}}</span> <span class="dashed">&mdash;</span></p>
+              {{{content}}}
+              <p><span class="dashed">&mdash;</span> <span class="date">{{date}}</span> <span class="dashed">&mdash;</span> <a href="{{src_link}}">{{src_name}}</a></p>
+            </div>
+
+            {{/content.news_post}}
+            
+            <div class="news-container">
+              <p class="lead">Have an event you want us to plug? Have a video to show us? Send us a tip - <em>editors @ jiboneus.com</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- body content container ends -->
+
+    {{> footer.html}}
+
+  </body>
+
+  {{> scripts.html}}
+
+</html>
