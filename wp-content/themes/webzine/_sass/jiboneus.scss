@@ -1,6 +1,7 @@
 /* Main styles */
 
 @import 'vendor/bootstrap/_bootstrap.min';
+@import '_icons';
 
 $sans_font: "Source Sans Pro","Myriad Pro","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 $serif_font: "Fauna One", Georgia, Cambria, "Times New Roman", Times, serif;
@@ -97,6 +98,7 @@ $border_color: #eeeeee;
     -webkit-background-origin: padding-box;
     -webkit-background-size: cover;
     background-attachment: scroll;
+    background-attachment: fixed;
     background-clip: border-box;
     background-origin: padding-box;
     background-size: cover;
@@ -190,6 +192,38 @@ $border_color: #eeeeee;
     }
   }
 }
+
+// -- sidebar style
+.sidebar-container {
+  text-align: center;
+  h4 { 
+    color: #999;
+    margin-bottom: 15px;
+  }
+  .social-links {
+    a {
+      padding: 10px;
+      background-color: #222;
+      color: #fff;
+      font-size: 20px;
+      line-height: 30px;
+      display: inline-block;
+      height: 50px;
+      width: 50px;
+      border-radius: 90px;
+            &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .social-bar-panel {
+    border-bottom: 1px solid $border_color;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+// -- article
 .article-headline {
   margin-top: 50px;
   //text-align: center;
