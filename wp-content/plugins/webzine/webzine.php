@@ -26,6 +26,7 @@ if(!function_exists('webzine_custom_post')) {
   function webzine_custom_post() {
     
     // -- custom post type for news item
+    /*
     $news_labels = array(
       'name'                => __('News Items'),
       'singular_name'       => __('News Item'),
@@ -53,6 +54,7 @@ if(!function_exists('webzine_custom_post')) {
     );
 
     register_post_type('news', $news_args);
+    */
 
     // -- custom post type for featured post
     $featured_post_labels = array(
@@ -146,6 +148,7 @@ if(!function_exists('webzine_custom_post')) {
 
 // -----------------------------------------------------
 // -- Create Meta Box for Custom Post Type: News item --
+/*
 add_action('add_meta_boxes', 'webzine_news_item_source');
 if(!function_exists('webzine_news_item_source')) {
   function webzine_news_item_source() {
@@ -204,3 +207,4 @@ if(!function_exists('webzine_news_item_box_save')) {
     update_post_meta($post->ID, 'news_source_link', $source_link);
   }
 }
+*/
