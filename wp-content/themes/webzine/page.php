@@ -30,6 +30,26 @@ $post_content = array(
   "permalink" => $permalink
 );
 
+// -- Setup social media tag content
+$og = array(
+  "title"     => $title,
+  "site_name" => get_bloginfo('name'),
+  "description" => strip_tags(html_entity_decode($excerpt)),
+  "type"        => "article",
+  "url"         => $permalink,
+  "image"       => $image
+);
+$tw = array(
+  "card"        => "summary",
+  "site"        => "@jiboneus",
+  "creator"     => "@jiboneus", // -- [TODO] setup a field for author to put in twitter handle
+  "title"       => $title,
+  "description" => strip_tags(html_entity_decode($excerpt)),
+  "image"       => $image
+
+);
+
+
 $show_analytics = false;
 if($_SERVER['SERVER_NAME'] == 'jiboneus.com') {
   $show_analytics = true;
@@ -49,6 +69,8 @@ $data = array(
     "bootstrap"   => $dir ."/js/vendor/bootstrap/bootstrap.min.js",
     "js"          => $dir ."/js/jiboneus.js"
   ),
+  "og" => $og,
+  "tw" => $tw,
   "content" => array(
     "window_title"  => $title,
     "post"          => $post_content

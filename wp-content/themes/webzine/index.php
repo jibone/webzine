@@ -122,7 +122,7 @@ for($i = 0; $i < $c; $i++) {
 
 //echo "</pre>";
 
-// -- Setup open graph tag
+// -- Setup social media tag content
 $og = array(
   "title"       => get_bloginfo('name'),
   "site_name"   => get_bloginfo('name'),
@@ -131,7 +131,6 @@ $og = array(
   "url"         => get_bloginfo('url'),
   "image"       => $dir."img/logo.png"
 );
-
 $tw = array(
   "card"        => "summary",
   "site"        => "@jiboneus",
