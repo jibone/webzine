@@ -122,6 +122,26 @@ for($i = 0; $i < $c; $i++) {
 
 //echo "</pre>";
 
+// -- Setup open graph tag
+$og = array(
+  "title"       => get_bloginfo('name'),
+  "site_name"   => get_bloginfo('name'),
+  "description" => get_bloginfo('description'),
+  "type"        => "website",
+  "url"         => get_bloginfo('url'),
+  "image"       => $dir."img/logo.png"
+);
+
+$tw = array(
+  "card"        => "summary",
+  "site"        => "@jiboneus",
+  "creator"     => "@jiboneus",
+  "title"       => get_bloginfo('name'),
+  "description" => get_bloginfo('description'),
+  "image"       => $dir."img/logo.png"
+);
+
+// -- Only show analytics when in live server
 $show_analytics = false;
 if($_SERVER['SERVER_NAME'] == 'jiboneus.com') {
   $show_analytics = true;
@@ -140,6 +160,8 @@ $data = array(
     "bootstrap"   => $dir ."/js/vendor/bootstrap/bootstrap.min.js",
     "js"          => $dir ."/js/jiboneus.js"
   ),
+  "og" => $og,
+  "tw" => $tw,
   "content" => array(
     "window_title"  => "Jiboneus Webzine",
     "coming_soon"   => $coming_soon,
