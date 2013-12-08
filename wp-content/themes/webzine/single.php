@@ -52,7 +52,7 @@ $og = array(
   "description" => strip_tags(html_entity_decode($excerpt)),
   "type"        => "article",
   "url"         => $permalink,
-  "image"       => $image
+  "image"       => $image[0]
 );
 $tw = array(
   "card"        => "summary",
@@ -60,7 +60,7 @@ $tw = array(
   "creator"     => "@jiboneus", // -- [TODO] setup a field for author to put in twitter handle
   "title"       => $title,
   "description" => strip_tags(html_entity_decode($excerpt)),
-  "image"       => $image
+  "image"       => $image[0]
 
 );
 
