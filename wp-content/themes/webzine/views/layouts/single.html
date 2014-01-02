@@ -7,7 +7,7 @@
     {{#content.post}}
       {{#featured}}
       <!-- hero article container start -->
-      <div class="featured-hero-container">
+      <div class="featured-hero-container headline-container">
         <div class="hero-image-container" style="background-image: url({{image}})">
           <div class="hero-shades"></div>
           <div class="container">
@@ -15,7 +15,11 @@
               <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 hero-content">
                 <h1 class="hero-title" id="heroTitle"><a class="hero-title">{{title}}</a></h1>
                 <div class="content"><p>{{{excerpt}}}</p></div>
-                <div class="content"><span class="author-avatar"><img src="{{avatar}}" width="24" height="24"></span> &middot; <span class="author-name">{{author}}</span> &middot; <span class="post-date">{{date}}</span></div>
+                <div class="content">By <span class="author-name">{{author}}</span> &middot; <span class="post-date">{{date}}</span></div>
+                <div class="social-buttons">
+                  <div class="fb-like" data-href="{{permalink}}" data-width="200" data-layout="button_count" data-action="recommend" data-show-faces="false" data-share="false"></div>
+                  <div class="tweet-btn"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a></div>
+                </div>
               </div>
             </div>
           </div>
@@ -24,13 +28,13 @@
       {{/featured}}
 
       {{#normal}}
-      <div class="article-headline">
+      <div class="article-headline headline-container">
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
               <h1>{{title}}</h1>
               {{#not_page}}
-              <div class="content"><span class="author-avatar"><img src="{{avatar}}" width="24" height="24"></span> &middot; <span class="author-name">{{author}}</span> &middot; <span class="post-date">{{date}}</span></div>
+              <div class="content">Written by <span class="author-name"><strong>{{author}}</strong></span> &middot; <span class="post-date">{{date}}</span></div>
               {{/not_page}}
             </div>
           </div>
@@ -42,14 +46,39 @@
       <div class="body-content-container single-body {{#normal}}normal-post{{/normal}}">
         <div class="container">
           <div class="row">
-            <article class="col-xs-12 col-sm-12 {{#featured}}col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1{{/featured}} {{#normal}}col-md-11 col-lg-10{{/normal}} single-post">
+            <article class="col-xs-12 col-sm-12 {{#featured}}col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1{{/featured}} {{#normal}}col-md-8 col-lg-9{{/normal}} single-post">
               
               {{{content}}}
             
             </article>
+            <sidebar class="col-xs-12 col-sm-12 col-md-4 col-lg-3 sidebar-container">
+              <div class="share-block twitter-share-block">
+                <div class="tweet-btn"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a></div>                
+              </div>
+              <div class="share-block facebook-share-block">
+                <div class="fb-like" data-href="{{permalink}}" data-width="200" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+              </div>
+            </sidebar>
           </div>
         </div>
       </div><!-- body content container ends -->
+
+      <!-- author content container start -->
+      <div class="author-content-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 {{#featured}}col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1{{/featured}} {{#normal}}col-md-8 col-lg-9{{/normal}} author-content">
+              <div class="author-avatar">
+                <img src="{{avatar}}" class="pull-left" />
+              </div>
+              <div class="author-description">
+                <h4>About the author</h4>
+                {{ author_bio }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- author content container ends -->
     {{/content.post}}
 
     {{> footer.html}}

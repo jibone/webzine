@@ -76,6 +76,16 @@
               <a href="http://updates.jiboneus.com" class="icon-tumblr-rect"></a>
             </div>
             
+            {{#has_featured}}
+            <h4 class="sidebar-title">&mdash; &nbsp;Previously Featured&nbsp; &mdash;</h4>
+            {{/has_featured}}
+            
+            {{#featured_list}}
+            <div class="sidebar-panel post-list-link">
+              <p>{{title}}</p>
+            </div>
+            {{/featured_list}}
+            
             <div class="news-container">
               <p class="lead">Have an event you want us to plug? Have a video to show us? Send us a tip - <em>editors @ jiboneus.com</em></p>
             </div>

@@ -12,6 +12,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
+    <!-- feed auto discovery -->
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{{ feed.rss2 }}" />
+    <link rel="alternate" type="test/xml" title="RSS .92" href="{{ feed.rss }}" />
+    <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="{{ feed.atom }}" />
+
     {{#og}}
     <!-- Open Graph Tags -->
     <meta property="og:title" content="{{ title }}" />

@@ -9,11 +9,10 @@ $dir = "/wp-content/themes/webzine/";
 //echo "<pre>";
 $args = array(
   'post_type'       => 'featured',
-  'post_per_page'   => '1'
+  'post_per_page'   => '6'
 );
 $results = new WP_Query($args);
 $results_post = $results->get_posts();
-
 $title      = apply_filters('the_title', $results_post[0]->post_title);
 $excerpt    = apply_filters('the_excerpt', $results_post[0]->post_excerpt);
 $content    = apply_filters('the_content', $results_post[0]->post_content);
@@ -38,6 +37,38 @@ if( $image[0] == ''    || $image[0] == null ||
     "avatar"    => $avatar,
     "permalink" => $permalink
   );
+}
+
+$has_featured = false;
+$featured_list = false;
+$featured_count = count($results_post);
+if($featured_count > 1) {
+  $featured_list = array();
+  for($i = 1; $i <= $featured_count; $i++) {
+    $title      = apply_filters('the_title', $results_post[$i]->post_title);
+    $excerpt    = apply_filters('the_excerpt', $results_post[$i]->post_excerpt);
+    $content    = apply_filters('the_content', $results_post[$i]->post_content);
+    $post_date  = date('F j, Y', strtotime($results_post[$i]->post_date_gmt));
+    $permalink  = get_permalink($results_post[$i]->ID);
+    $image      = wp_get_attachment_image_src(get_post_thumbnail_id($results_post[$i]->ID), 'large');
+    $author     = get_userdata($results_post[$i]->post_author);
+    $avatar     = get_wp_user_avatar_src($results_post[$i]->post_author, 24);
+    if( $image[0] != ''   || $image[0] != null || 
+      $excerpt != ''      || $excerpt != null ||
+      $title != ''        || $title != null) {
+      $has_featured = 
+      $f = array(
+        "date"      => $post_date,
+        "title"     => $title,
+        "excerpt"   => $excerpt,
+        "image"     => $image[0],
+        "author"    => $author->display_name,
+        "avatar"    => $avatar,
+        "permalink" => $permalink
+      );
+      array_push($featured_list, $f);
+    }
+  }
 }
 
 // -- get articles, reviews and interviews
@@ -140,6 +171,13 @@ $tw = array(
   "image"       => $dir."img/logo.png"
 );
 
+$feed = array(
+  "rss"         => get_bloginfo('rss_url'),
+  "rss2"        => get_bloginfo('rss2_url'),
+  "rdf"         => get_bloginfo('rdf_url'),
+  "atom"        => get_bloginfo('atom_url')
+);
+
 // -- Only show analytics when in live server
 $show_analytics = false;
 if($_SERVER['SERVER_NAME'] == 'jiboneus.com') {
@@ -153,21 +191,24 @@ $data = array(
   ),
   "show_analytics" => $show_analytics,
   "assets" => array(
-    "css"         => $dir ."/css/jiboneus.css",
-    "modernizr"   => $dir ."/js/vendor/modernizr/modernizr-2.6.2.min.js",
-    "jquery"      => $dir ."/js/vendor/jquery/jquery-1.10.1.min.js",
-    "bootstrap"   => $dir ."/js/vendor/bootstrap/bootstrap.min.js",
-    "js"          => $dir ."/js/jiboneus.js"
+    "css"         => $dir ."css/jiboneus.css",
+    "modernizr"   => $dir ."js/vendor/modernizr/modernizr-2.6.2.min.js",
+    "jquery"      => $dir ."js/vendor/jquery/jquery-1.10.1.min.js",
+    "bootstrap"   => $dir ."js/vendor/bootstrap/bootstrap.min.js",
+    "js"          => $dir ."js/jiboneus.js"
   ),
-  "og" => $og,
-  "tw" => $tw,
+  "og"    => $og,
+  "tw"    => $tw,
+  "feed"  => $feed,
   "content" => array(
     "window_title"  => "Jiboneus Webzine",
     "coming_soon"   => $coming_soon,
     "featured_post" => $featured_post,
     "content_post"  => $content_post,
     "news_post"     => $news_post
-  )
+  ),
+  "has_featured"    => $has_featured,
+  "featured_list"   => $featured_list
 );
 
 $m = new Mustache_Engine(array(

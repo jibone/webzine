@@ -40,6 +40,7 @@ if( $image[0] == ''    || $image[0] == null ||
     "content"   => $content,
     "image"     => $image[0],
     "author"    => $author->display_name,
+    "author_bio"  => $author->user_description,
     "avatar"    => $avatar,
     "permalink" => $permalink
   );
@@ -64,6 +65,13 @@ $tw = array(
 
 );
 
+$feed = array(
+  "rss"         => get_bloginfo('rss_url'),
+  "rss2"        => get_bloginfo('rss2_url'),
+  "rdf"         => get_bloginfo('rdf_url'),
+  "atom"        => get_bloginfo('atom_url')
+);
+
 $show_analytics = false;
 if($_SERVER['SERVER_NAME'] == 'jiboneus.com') {
   $show_analytics = true;
@@ -83,8 +91,9 @@ $data = array(
     "bootstrap"   => $dir ."/js/vendor/bootstrap/bootstrap.min.js",
     "js"          => $dir ."/js/jiboneus.js"
   ),
-  "og" => $og,
-  "tw" => $tw,
+  "og"    => $og,
+  "tw"    => $tw,
+  "feed"  => $feed,
   "content" => array(
     "window_title"  => $title,
     "post"          => $post_content

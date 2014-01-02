@@ -46,9 +46,14 @@ $tw = array(
   "title"       => $title,
   "description" => strip_tags(html_entity_decode($excerpt)),
   "image"       => $image
-
 );
 
+$feed = array(
+  "rss"         => get_bloginfo('rss_url'),
+  "rss2"        => get_bloginfo('rss2_url'),
+  "rdf"         => get_bloginfo('rdf_url'),
+  "atom"        => get_bloginfo('atom_url')
+);
 
 $show_analytics = false;
 if($_SERVER['SERVER_NAME'] == 'jiboneus.com') {
@@ -69,8 +74,9 @@ $data = array(
     "bootstrap"   => $dir ."/js/vendor/bootstrap/bootstrap.min.js",
     "js"          => $dir ."/js/jiboneus.js"
   ),
-  "og" => $og,
-  "tw" => $tw,
+  "og"    => $og,
+  "tw"    => $tw,
+  "feed"  => $feed,
   "content" => array(
     "window_title"  => $title,
     "post"          => $post_content

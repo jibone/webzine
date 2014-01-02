@@ -130,6 +130,19 @@ $border_color: #eeeeee;
   }
 }
 
+// -- headline container
+.headline-container {
+  .content {
+    margin-bottom: 10px;
+  }
+  .social-buttons {
+    margin-top: 10px;
+    .fb-like, .tweet-btn {
+      display: inline-block;
+    }
+  }
+}
+
 // -- body content container style
 .body-content-container {
   margin-top: 530px;
@@ -211,7 +224,7 @@ $border_color: #eeeeee;
       height: 50px;
       width: 50px;
       border-radius: 90px;
-            &:hover {
+      &:hover {
         text-decoration: none;
       }
     }
@@ -220,6 +233,29 @@ $border_color: #eeeeee;
     border-bottom: 1px solid $border_color;
     padding-bottom: 20px;
     margin-bottom: 20px;
+  }
+  .share-block {
+    width: 171px;
+    height: 107px;
+    position: relative;
+  }
+  .twitter-share-block {
+    background-image: url('../img/layout/twitter-share-block.png');
+    .tweet-btn {
+      display: inline-block;
+      position: absolute;
+      top: 66px;
+      left: 17px;
+    }
+  }
+  .facebook-share-block {
+    background-image: url('../img/layout/facebook-share-block.png');
+    .fb-like {
+      display: inline-block;
+      position: absolute;
+      top: 66px;
+      left: 17px;
+    }
   }
 }
 
@@ -271,11 +307,32 @@ $border_color: #eeeeee;
 .normal-post {
   margin-top: 50px;
 }
-.author-avatar {
-  img {
-    border-radius: 100px;
+
+.author-content-container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  .author-content {
+    padding: 20px;
+    background-color: #f1f1f1;
+  }
+  .author-avatar {
+    float: left;
+    width: 10%;
+    height: auto;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 100px;
+    }
+  }
+  .author-description {
+    float: right;
+    width: 89%;
   }
 }
+
+
+
 .footer-container {
   border-top: 1px solid $border_color;
   border-bottom: 30px solid #111;
